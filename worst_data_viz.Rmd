@@ -1,0 +1,53 @@
+---
+title: "Data Viz Worst"
+author: "Felicia Cruz"
+date: "8/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+
+space_launches <- read_csv(here("data", "space_launches.csv"))
+
+# Specifically for data viz 
+library(patchwork)
+library(ggrepel)
+library(gghighlight)
+library(paletteer)
+library(ggExtra)
+library(ggbeeswarm)
+library(gapminder)
+library(sf)
+```
+
+```{r}
+space_grouped <- space_launches %>% 
+  group_by(agency) %>% 
+  summarize(count = n()) %>% 
+  drop_na()
+
+ggplot(space_grouped, aes(y = agency, x = count)) +
+  geom_point(aes(color = agency),
+             shape = 115, 
+             size = 8,
+             show.legend = FALSE) +
+  scale_x_continuous(breaks = c(0, 200, 500, 1050, 1250)) +
+  labs(title = "Agencies in Space!") +
+  theme(
+    plot.background = element_rect(fill = "brown"), 
+    axis.text.x = element_text(color = "cyan"),
+    axis.text.y = element_text(color = "magenta"),
+    text = element_text(family = "Comic Sans MS"),
+    panel.grid.major.x = element_line(color = "black", linetype = 2)
+  )
+ 
+  
+
+
+ggsave(here("ugly_space_graph.jpg"))
+```
+
