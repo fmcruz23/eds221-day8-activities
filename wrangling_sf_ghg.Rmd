@@ -7,11 +7,14 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(palmerpenguins)
+library(here)
 ```
 
 ```{r}
 sf_ghg <- read_csv(here("data", "sf_ghg.csv"))
-library(palmerpenguins)
+
 ```
 
 Summary tables
