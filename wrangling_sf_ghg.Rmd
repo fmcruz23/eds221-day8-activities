@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 sf_ghg <- read_csv(here("data", "sf_ghg.csv"))
+library(palmerpenguins)
 ```
 
 Summary tables
@@ -53,5 +54,12 @@ ggplot(data = graph_data, aes(x = Calendar_Year, y = total_emissions)) +
   )
 
 ggsave(here("pretty_plot.jpg"))
+```
+```{r, fig.alt = "Three histograms showing the body mass distribution of Adelie, Chinstrap, and Gentoo penguins"}
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram() +
+  facet_wrap(~species)
+
+
 ```
 
